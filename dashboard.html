@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suhani's Daily Digest — Sunday, 19 April 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0608;
+    --bg2: #160b0e;
+    --bg3: #1e0f13;
+    --burgundy: #6b1a2e;
+    --burgundy-light: #8b2340;
+    --burgundy-glow: #b03055;
+    --cream: #f0e8d8;
+    --cream-dim: #c8bfad;
+    --gold: #c9a84c;
+    --gold-light: #e8c96a;
+    --text: #e8e0d0;
+    --text-dim: #998a7a;
+    --border: rgba(107,26,46,0.35);
+    --card-bg: rgba(22,11,14,0.95);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  .wrapper { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 0 2rem;
+    text-align: center;
+    position: relative;
+  }
+  .masthead::after {
+    content: '';
+    display: block;
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--burgundy-glow), transparent);
+    margin: 1.5rem auto 0;
+  }
+  .edition-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .masthead h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+  .masthead h1 span {
+    color: var(--burgundy-glow);
+    font-style: italic;
+  }
+  .masthead-sub {
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    margin-top: 1rem;
+    text-transform: uppercase;
+  }
+
+  /* ── MARKET STRIP ── */
+  .market-strip {
+    display: flex;
+    gap: 1rem;
+    margin: 2.5rem 0;
+    flex-wrap: wrap;
+  }
+  .market-card {
+    flex: 1;
+    min-width: 160px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    transition: border-color 0.2s;
+  }
+  .market-card:hover { border-color: var(--burgundy-glow); }
+  .market-icon { font-size: 1.2rem; }
+  .market-name { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); }
+  .market-price { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--cream); font-weight: 700; }
+  .market-change { font-size: 0.8rem; font-weight: 500; }
+
+  /* ── SECTION GRID ── */
+  .section-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  /* ── NEWS SECTION ── */
+  .news-section {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.8rem 2rem;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .news-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--burgundy), var(--burgundy-glow), var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .news-section:hover { border-color: var(--burgundy-glow); transform: translateY(-2px); }
+  .news-section:hover::before { opacity: 1; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 1rem;
+  }
+  .section-icon { font-size: 1.1rem; }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--cream);
+    letter-spacing: 0.01em;
+  }
+  .section-body {
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: var(--cream-dim);
+    font-weight: 300;
+  }
+
+  /* ── SPANISH SECTION ── */
+  .spanish-section {
+    background: linear-gradient(135deg, var(--bg3), rgba(107,26,46,0.15));
+    border: 1px solid var(--burgundy);
+    border-radius: 8px;
+    padding: 2.5rem;
+    margin-top: 2.5rem;
+  }
+  .spanish-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .spanish-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--cream);
+  }
+  .spanish-theme-badge {
+    background: var(--burgundy);
+    color: var(--cream);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+  }
+  .spanish-intro {
+    font-size: 0.88rem;
+    color: var(--cream-dim);
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+  .phrases-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .phrase-card {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: rgba(0,0,0,0.2);
+    border-radius: 6px;
+    padding: 0.9rem 1.1rem;
+    border-left: 2px solid var(--burgundy-glow);
+  }
+  .phrase-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--burgundy-glow);
+    font-weight: 700;
+    min-width: 28px;
+    line-height: 1.4;
+  }
+  .phrase-spanish {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--gold-light);
+    font-weight: 400;
+  }
+  .phrase-english {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    margin-top: 0.15rem;
+  }
+  .phrase-tip {
+    font-size: 0.75rem;
+    color: var(--cream-dim);
+    margin-top: 0.3rem;
+    opacity: 0.8;
+  }
+  .spanish-footer {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .spanish-note {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .spanish-note strong { color: var(--gold); font-weight: 500; }
+
+  /* ── FOOTER ── */
+  .digest-footer {
+    text-align: center;
+    padding: 2.5rem 0 1rem;
+    border-top: 1px solid var(--border);
+    margin-top: 3rem;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── SECTION HEADING ── */
+  .block-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 3rem 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .block-heading::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Fade in */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .masthead { animation: fadeUp 0.6s ease both; }
+  .market-strip { animation: fadeUp 0.6s 0.15s ease both; }
+  .news-section { animation: fadeUp 0.5s ease both; }
+  .spanish-section { animation: fadeUp 0.6s ease both; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header class="masthead">
+    <div class="edition-label">Morning Edition · Sunday, 19 April 2026</div>
+    <h1>Suhani's <span>Daily</span> Digest</h1>
+    <p class="masthead-sub">Curated · Summarised · Yours</p>
+  </header>
+
+  <div class="block-heading">Markets</div>
+  <div class="market-strip">
+        <div class="market-card">
+            <div class="market-icon">📈</div>
+            <div class="market-name">Nifty 50</div>
+            <div class="market-price">24,353.55</div>
+            <div class="market-change" style="color:#7fd17f">+0.65%</div>
+        </div>
+        <div class="market-card">
+            <div class="market-icon">🗽</div>
+            <div class="market-name">S&P 500</div>
+            <div class="market-price">7,126.06</div>
+            <div class="market-change" style="color:#7fd17f">+1.20%</div>
+        </div>
+        <div class="market-card">
+            <div class="market-icon">₿</div>
+            <div class="market-name">Bitcoin</div>
+            <div class="market-price">$75,766</div>
+            <div class="market-change" style="color:#e07f7f">-0.58%</div>
+        </div>
+        <div class="market-card">
+            <div class="market-icon">Ξ</div>
+            <div class="market-name">Ethereum</div>
+            <div class="market-price">$2,329</div>
+            <div class="market-change" style="color:#e07f7f">-1.57%</div>
+        </div></div>
+
+  <div class="block-heading">Today's Briefing</div>
+  <div class="section-grid">
+        <article class="news-section">
+            <div class="section-header">
+                <span class="section-icon">🌍</span>
+                <h2 class="section-title">World Affairs</h2>
+            </div>
+            <p class="section-body">Global events are unfolding at a rapid pace, with Australia's most-decorated soldier, Ben Roberts-Smith, vowing to fight war crime charges, while Pope Francis clarifies that his recent remarks on "tyrants" were not aimed at former US President Trump, highlighting the complexities of international diplomacy. The war between the US and Iran continues to have far-reaching consequences, with the Strait of Hormuz remaining largely closed and Qatar struggling to come to terms with the economic blow dealt to its gas-rich economy. Meanwhile, in a potentially significant development, Vice President JD Vance is set to lead a US delegation to Pakistan for talks mediated by the Pakistani government, raising hopes for a possible breakthrough in the conflict. As the global landscape continues to shift, the outcome of these events will have significant implications for international relations and global stability, and it's essential to watch how the US-Iran conflict and its ripple effects play out in the coming days.</p>
+        </article>
+        <article class="news-section">
+            <div class="section-header">
+                <span class="section-icon">⚔️</span>
+                <h2 class="section-title">War & Conflicts</h2>
+            </div>
+            <p class="section-body">Tensions persist in various global hotspots, with satellite images revealing Israel's expansion of military sites in Gaza, underscoring the stalled US-backed reconstruction efforts in the region. Meanwhile, in the Democratic Republic of Congo, the government and M23 rebels have committed to protecting civilians and aid deliveries after talks in Switzerland, a glimmer of hope in an otherwise dire situation. The US-Iran standoff over the Strait of Hormuz continues to simmer, with the US planning to send negotiators to Pakistan for further talks, as the conflict's ripple effects are felt in Ukraine, where President Zelensky has condemned the US extension of a Russian sanctions waiver. As the world grapples with these complex conflicts, it's essential to remain vigilant, and the situation in the Middle East will be particularly worth watching in the coming days.</p>
+        </article>
+        <article class="news-section">
+            <div class="section-header">
+                <span class="section-icon">🇮🇳</span>
+                <h2 class="section-title">India News</h2>
+            </div>
+            <p class="section-body">As India continues to navigate its place on the global stage, today's news brings a mix of international intrigue and domestic concerns. The Indian tanker that successfully crossed the Hormuz Strait despite two vessels being forced to turn back after firing is a testament to our country's growing naval capabilities, while the thousands who gathered to greet Union Home Minister Amit Shah in Chennai underscore the ongoing importance of political rallies in Indian democracy. Meanwhile, closer to home, water pollution and drunk driving remain pressing issues, as evidenced by the woes of Dharapuram constituency and the 929 booked for drunk driving across Hyderabad. As we follow these developments, it's clear that our country's trajectory will be shaped by both its global relationships and local challenges. What to watch in the coming days is how these disparate threads - from international diplomacy to domestic governance - will intersect and impact the daily lives of Indians.</p>
+        </article>
+        <article class="news-section">
+            <div class="section-header">
+                <span class="section-icon">🏛️</span>
+                <h2 class="section-title">Politics</h2>
+            </div>
+            <p class="section-body">The intersection of politics and influence is under scrutiny, as reports emerge of Syrian billionaires invoking the Trump name to sway foreign policy discussions, amidst ongoing talks about potential Trump family business deals. Meanwhile, in the US South, Muslim voters are facing a surge in hateful rhetoric from politicians, threatening to alienate a once-sympathetic demographic. Across the Atlantic, UK Prime Minister Starmer is grappling with fallout from the Peter Mandelson scandal, with ministers revealing that he would have blocked the appointment had he known of security concerns, and facing criticism for his handling of the situation in Scotland. As leaders navigate these complex issues, it's clear that the lines between politics, power, and identity are increasingly blurred. This matters because the ability of governments to balance competing interests and maintain public trust will be a key factor in determining their legitimacy and effectiveness in the months to come.</p>
+        </article>
+        <article class="news-section">
+            <div class="section-header">
+                <span class="section-icon">💻</span>
+                <h2 class="section-title">Technology</h2>
+            </div>
+            <p class="section-body">The world of tech is abuzz with the latest advancements in AI tools, which are revolutionizing content creation and transforming the way we work. From ChatGPT to LimeWire AI Studio, these innovative platforms are making it easier for creators to produce high-quality content and streamline their workflows. Meanwhile, companies like Keychron are pushing the boundaries of hardware design, with their latest Ultra 8K keyboards boasting marathon battery life and impressive features. As AI continues to shape the tech landscape, it's exciting to see how these tools will impact various industries and aspects of our lives. As we move forward, it's essential to keep an eye on how these developments will shape the future of work, entertainment, and communication, and what implications they may have for our daily lives.</p>
+        </article>
+        <article class="news-section">
+            <div class="section-header">
+                <span class="section-icon">🤖</span>
+                <h2 class="section-title">AI & Data Science</h2>
+            </div>
+            <p class="section-body">The world of AI and data science is abuzz with exciting developments, as researchers continue to push the boundaries of what's possible with retrieval-augmented generation (RAG) systems, vector quantized variational autoencoders (VQ-VAE), and other cutting-edge technologies. A new open-source framework, Proxy-Pointer RAG, is making waves with its ability to achieve 100% accuracy with smarter retrieval, while others are exploring the creative potential of VQ-VAE and Transformers to generate entire Minecraft worlds. However, not all is smooth sailing, as experts are also highlighting the hidden pitfalls of RAG systems, such as conflicting context in the same retrieval window, which can lead to confidently wrong answers despite perfect document retrieval scores. As researchers like Google work to address these challenges with innovative solutions like TurboQuant, it's clear that the pursuit of more efficient and effective AI systems is an ongoing and multifaceted endeavor. As the field continues to evolve, it's essential to keep a close eye on how these developments intersect and impact the broader landscape of AI and data science.</p>
+        </article>
+        <article class="news-section">
+            <div class="section-header">
+                <span class="section-icon">🔬</span>
+                <h2 class="section-title">Science</h2>
+            </div>
+            <p class="section-body">Today, the boundaries between human innovation and the natural world are blurring in astonishing ways, as scientists uncover the profound impact of our collective actions on the planet and develop groundbreaking technologies to harness the power of nature. From dirt-powered fuel cells that could revolutionize the way we power devices, to artificial neurons that can communicate with living brain cells, the possibilities for merging machines with the human experience are expanding exponentially. Meanwhile, the latest discoveries about the effects of caffeine on ants and the decline of butterfly populations serve as poignant reminders of the intricate web of life that sustains us, and the urgent need to balance progress with preservation. As we push the frontiers of space exploration and grapple with the complexities of transitioning to clean energy, one thing is clear: the future of our planet depends on our ability to harness the power of science and technology to create a more sustainable and harmonious world. As we continue to hurtle forward into the unknown, the key to unlocking a brighter future lies in embracing the awe-inspiring potential of science to transform our daily lives.</p>
+        </article>
+        <article class="news-section">
+            <div class="section-header">
+                <span class="section-icon">💼</span>
+                <h2 class="section-title">Business & Finance</h2>
+            </div>
+            <p class="section-body">The business world is abuzz with the potential of artificial intelligence to revolutionize operations, but leaders must prioritize making AI humane to foster trust among their teams. Meanwhile, companies like ICICI Prudential Life Insurance and Tata Elxsi are navigating financial slumps, with the former focusing on growing absolute value of new business and the latter declaring a dividend despite a decline in net profit. On a more positive note, Cyient DLM has seen a significant surge in profit after tax, and entrepreneurs can now access affordable tools and courses to upskill and automate their businesses. As the landscape continues to shift, it's clear that businesses must adapt to stay ahead. This matters because the ability to harness AI and navigate financial fluctuations will be key to success in the coming year, and investors should keep a close eye on how companies balance innovation with fiscal responsibility.</p>
+        </article>
+        <article class="news-section">
+            <div class="section-header">
+                <span class="section-icon">✨</span>
+                <h2 class="section-title">Trends & Pop Culture</h2>
+            </div>
+            <p class="section-body">Have you heard about the latest trending posts that are taking the internet by storm? It seems like today is all about feel-good content, from wholesome posts that will restore your faith in humanity to wildly popular products on Amazon that are giving us major FOMO. But let's be real, the real tea is being spilled on Grindr profiles and city roasts, because who doesn't love a good laugh at someone else's expense? It's all about balance, folks, and today's trends are serving up a mix of heartwarming and hilarious content that's definitely worth a scroll. As we dive deeper into the world of online trends, it's clear that what we're really watching is the evolution of internet culture, and that's what makes this space so fascinating to keep an eye on.</p>
+        </article>
+        <article class="news-section">
+            <div class="section-header">
+                <span class="section-icon">🎬</span>
+                <h2 class="section-title">Entertainment</h2>
+            </div>
+            <p class="section-body">The entertainment world is abuzz with exciting news, from the "Super Mario Galaxy Movie" dominating the box office for its third weekend in a row, raking in a whopping $35 million, to Hollywood legends gathering to honor Eddie Murphy with the AFI Life Achievement Award. Meanwhile, Coachella is making headlines with standout performances, including The Strokes' powerful protest statement and Justin Bieber's surprise duets with SZA and Billie Eilish. The film festival circuit is also heating up, with new projects and re-releases making waves, such as Joe Russo's tease of a re-released "Avengers: Endgame" with new footage. As the entertainment landscape continues to evolve, it's clear that this summer is shaping up to be an unforgettable one, and fans should keep a close eye on the upcoming releases and performances that will undoubtedly make a lasting impact.</p>
+        </article>
+        <article class="news-section">
+            <div class="section-header">
+                <span class="section-icon">🧠</span>
+                <h2 class="section-title">Wellness & Psychology</h2>
+            </div>
+            <p class="section-body">Today's research highlights some simple yet powerful ways to boost our overall wellness, from optimizing our exercise routines to nourishing our brains and bodies with essential minerals and vitamins. It's fascinating to see how often-overlooked habits, such as proper preparation before exercise, can make a significant difference in our gains, while minerals like those highlighted in recent studies can have a profound impact on our mood and mental health. Additionally, new findings on the link between vitamin D and colon cancer risk are a timely reminder of the importance of adequate nutrition, particularly given that many of us have low or deficient levels. As we move forward, it's essential to stay informed about these developments, and with ongoing research in the field of wellness and psychology, it's clear that taking control of our health is more accessible than ever, so be sure to watch for more breakthroughs on the connection between nutrition and disease prevention.</p>
+        </article>
+        <article class="news-section">
+            <div class="section-header">
+                <span class="section-icon">👗</span>
+                <h2 class="section-title">Lifestyle & Fashion</h2>
+            </div>
+            <p class="section-body">Hailey Bieber's Coachella nails are getting all the attention, and for good reason - her subtle tribute to Justin is a masterclass in understated glamour. Meanwhile, on the theater scene, Rose Byrne and Kelli O'Hara are bringing a little-seen Noël Coward comedy back to life with "Fallen Angels", which is set to open at the Todd Haimes Theatre. On the red carpet, it's all about making a statement, with Gigi Hadid proving that classic lip shapes can still turn heads, and the best dressed stars of the week pushing the boundaries of fashion with their bold, unexpected choices. As the fashion world continues to evolve, it's clear that taking risks and having fun with style is what's driving the conversation - and that's what makes it so exciting to watch what happens next. With the fashion landscape shifting faster than ever, it's essential to keep an eye on these trendsetters to stay ahead of the curve.</p>
+        </article>
+        <article class="news-section">
+            <div class="section-header">
+                <span class="section-icon">🚀</span>
+                <h2 class="section-title">Personal Growth & Career</h2>
+            </div>
+            <p class="section-body">Today, we're seeing a surge of exciting stories from the world of skating, with tales of marathon feats and creative commentary styles that are pushing the boundaries of the sport. From Dr. Climate's impressive performance in the New York 100K skate marathon to the innovative "comment-racing" approach used by Paul, it's clear that these athletes are driven by a passion for competition and self-expression. Meanwhile, behind-the-scenes glimpses into the writing process, like the introduction to a new blog, remind us that even the most accomplished individuals are still works in progress. As we follow these stories, we're reminded that the pursuit of excellence is just as important as the achievement itself, and we should be watching for how these athletes and writers continue to inspire and motivate us to push our own limits. With new stories and achievements emerging every day, it's essential to stay tuned to see how these individuals will next challenge themselves and redefine what's possible.</p>
+        </article>
+        <article class="news-section">
+            <div class="section-header">
+                <span class="section-icon">📰</span>
+                <h2 class="section-title">General News</h2>
+            </div>
+            <p class="section-body">A surge in violent incidents has raised concerns in the UK, with a north-west London synagogue targeted in an arson attack and a woman left in critical condition after being hit by a car in central London. Meanwhile, global politics are heating up, with Iran flexing its control over a key waterway and the Trump name being invoked in a bid to influence foreign policy. In the US, the Democratic party is considering a shift towards tax cuts, a move that's sparking debate among party loyalists, while a Trump loyalist has been installed to lead a high-profile case. As the global landscape continues to shift, one thing is clear: the coming days will be crucial in shaping the trajectory of international relations and domestic policy. With so many developments unfolding at breakneck speed, it's essential to keep a close eye on how these stories intersect and impact the world at large.</p>
+        </article></div>
+
+  
+  <section class="spanish-section">
+    <div class="spanish-header">
+      <div class="spanish-title">🇪🇸 Hoy en Español</div>
+      <div class="spanish-theme-badge">Work & Career</div>
+    </div>
+    <p class="spanish-intro">Aprender sobre el trabajo y la carrera en español te permitirá comunicarte con confianza en entornos profesionales y personales, abriéndote un mundo de oportunidades laborales y personales</p>
+    <div class="phrases-grid">
+        <div class="phrase-card">
+            <div class="phrase-number">01</div>
+            <div class="phrase-content">
+                <div class="phrase-spanish">Me llamo Juan y soy ingeniero</div>
+                <div class="phrase-english">My name is Juan and I'm an engineer</div>
+                <div class="phrase-tip">💡 Use 'me llamo' to introduce yourself, and 'soy' to state your profession</div>
+            </div>
+        </div>
+        <div class="phrase-card">
+            <div class="phrase-number">02</div>
+            <div class="phrase-content">
+                <div class="phrase-spanish">Trabajo en una empresa de tecnología</div>
+                <div class="phrase-english">I work in a tech company</div>
+                <div class="phrase-tip">💡 Use 'trabajo en' to indicate where you work, and 'empresa de' to describe the type of company</div>
+            </div>
+        </div>
+        <div class="phrase-card">
+            <div class="phrase-number">03</div>
+            <div class="phrase-content">
+                <div class="phrase-spanish">Estoy buscando un trabajo como profesor</div>
+                <div class="phrase-english">I'm looking for a job as a teacher</div>
+                <div class="phrase-tip">💡 Use 'estoy buscando' to express that you're looking for something, and 'como' to indicate the profession you're interested in</div>
+            </div>
+        </div>
+        <div class="phrase-card">
+            <div class="phrase-number">04</div>
+            <div class="phrase-content">
+                <div class="phrase-spanish">Tengo experiencia en marketing</div>
+                <div class="phrase-english">I have experience in marketing</div>
+                <div class="phrase-tip">💡 Use 'tengo experiencia en' to highlight your skills and experience in a particular area</div>
+            </div>
+        </div>
+        <div class="phrase-card">
+            <div class="phrase-number">05</div>
+            <div class="phrase-content">
+                <div class="phrase-spanish">Mi objetivo es ser gerente en cinco años</div>
+                <div class="phrase-english">My goal is to be a manager in five years</div>
+                <div class="phrase-tip">💡 Use 'mi objetivo es' to express your goals and ambitions, and 'en' to indicate a timeframe</div>
+            </div>
+        </div></div>
+    <div class="spanish-footer">
+      <div class="spanish-note"><strong>Nota Cultural</strong><br>En muchos países de habla hispana, la familia y las relaciones personales tienen un papel importante en la búsqueda de empleo y el avance en la carrera, por lo que es común que se pregunte sobre la familia y la vida personal en entrevistas de trabajo</div>
+      <div class="spanish-note"><strong>Tu Roadmap</strong><br>Este tema es fundamental en el nivel A1, ya que te permitirá presentarte y hablar sobre tus habilidades y objetivos, y más adelante, en el nivel B2, podrás profundizar en temas como la ética laboral y la responsabilidad social en el lugar de trabajo</div>
+    </div>
+  </section>
+
+  <footer class="digest-footer">
+    Generated Sunday, 19 April 2026 · Powered by Groq llama-3.3-70b-versatile · Built for Suhani Khanna
+  </footer>
+
+</div>
+</body>
+</html>
